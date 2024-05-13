@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -68,6 +69,14 @@ func putValue(c *gin.Context) {
 			"message": "NOVALUE",
 		})
 		return
+	}
+
+	if !strings.HasPrefix(value, "www.") {
+		value = "www." + value
+	}
+
+	if !strings.HasPrefix(value, "http") {
+		value = "http://" + value
 	}
 
 	var id string

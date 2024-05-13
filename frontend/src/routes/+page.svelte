@@ -1,5 +1,5 @@
 <script>
-	const BASEURL = 'http://localhost:9001';
+	let BASEURL = '';
 
 	import { onMount } from 'svelte';
 
@@ -16,6 +16,9 @@
 
 	onMount(() => {
 		setModeCurrent(false);
+		BASEURL = window.location.href.includes('localhost')
+			? 'http://localhost:9001'
+			: '144.202.12.141:9001';
 
 		const urlParams = new URLSearchParams(window.location.search);
 		if (urlParams.has('goto')) {
