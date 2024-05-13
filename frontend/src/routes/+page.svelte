@@ -18,7 +18,7 @@
 		setModeCurrent(false);
 		BASEURL = window.location.href.includes('localhost')
 			? 'http://localhost:9001'
-			: '144.202.12.141:9001';
+			: 'http://144.202.12.141:9001';
 
 		const urlParams = new URLSearchParams(window.location.search);
 		if (urlParams.has('goto')) {
