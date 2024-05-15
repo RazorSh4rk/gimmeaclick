@@ -38,3 +38,24 @@ func Get(key string) (string, error) {
 
 	return val, nil
 }
+
+func GetAll() (map[string]string, error) {
+	collection := make(map[string]string)
+
+	keys, err := rdb.Keys(ctx, "*").Result()
+
+	if err != nil {
+		return nil, err
+	}
+
+	for _, key := range keys {
+		rec, err := Get(key)
+		if err != nil {
+			rec = ""
+		}
+
+		collection[key] = rec
+	}
+
+	return collection, nil
+}

@@ -24,6 +24,7 @@ func Setup() {
 	server.GET("/ping", getPing)
 	server.GET("/g", getValue)
 	server.PUT("/p", putValue)
+	server.GET("/all", getAll)
 }
 
 func Run() {
@@ -114,4 +115,17 @@ func putValue(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": id,
 	})
+}
+
+func getAll(c *gin.Context) {
+	result, err := db.GetAll()
+
+	if err != nil {
+		c.JSON(500, gin.H{
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, result)
 }
